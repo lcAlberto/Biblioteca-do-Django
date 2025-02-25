@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "Biblioteca API",
+    "description": "Coleção de requisições para a API do CRUD da Biblioteca.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Autenticação",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"seu_usuario\",\n  \"password\": \"sua_senha\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/token/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "token", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Livros",
+      "item": [
+        {
+          "name": "Listar Livros",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/livros/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "livros", ""]
+            }
+          }
+        },
+        {
+          "name": "Criar Livro",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Novo Livro\",\n  \"autor\": 1,\n  \"isbn\": \"1234567890\",\n  \"disponivel\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/livros/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "livros", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empréstimos",
+      "item": [
+        {
+          "name": "Registrar Empréstimo",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livro\": 1,\n  \"usuario\": 2,\n  \"data_emprestimo\": \"2025-02-24\",\n  \"data_devolucao\": \"2025-03-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/emprestimos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emprestimos", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"novo_usuario\",\n  \"password\": \"senha_segura\",\n  \"tipo\": \"leitor\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", ""]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" },
+    { "key": "token", "value": "" }
+  ]
+}
+
